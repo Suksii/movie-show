@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.transform_style_3d{
+    transform-style: preserve-3d;
+}
+.card {
+    transform-style: preserve-3d;
+    transition: all 0.5s ease;
+}
+.card:hover{
+    transform: rotateY(180deg);
+}
+
+.backface_hidden {
+    backface-visibility: hidden;
+}
+.rotateY {
+    transform: rotateY(180deg);
+}
