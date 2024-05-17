@@ -51,7 +51,7 @@ const Movie = () => {
             text: 'Check out this movie',
             url: window.location.href
         })
-            .then(() => toast.success('Link shared successfully'))
+            .then(() => console.log('Successful share'))
             .catch((error) => console.log('Error sharing', error));
     }
 

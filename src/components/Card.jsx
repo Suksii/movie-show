@@ -6,7 +6,7 @@ const Card = ({src, alt, title,year, id, type}) => {
     const navigate = useNavigate();
 
     return (
-        <div className="relative w-[200px] h-[250px] py-10">
+        <div className="relative w-[300px] h-[400px] py-10">
             <div className="card absolute w-full h-full">
                 <div className="absolute w-full backface_hidden h-full rounded-md">
                     <img src={src} alt={alt} className="w-full h-full object-cover rounded-md"/>

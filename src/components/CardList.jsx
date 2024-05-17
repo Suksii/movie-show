@@ -4,8 +4,8 @@ import Card from "./Card.jsx";
 const CardList = ({data, type}) => {
     return (
         <div className="flex flex-wrap justify-center gap-5">
-            {data.map(item => (
-                <Card key={item.id}
+            {data.map((item,index) => (
+                <Card key={index}
                       title={item?.original_title}
                       year={item?.first_aired?.slice(0,4) || item?.release_date?.slice(0,4)}
                       src={item?.poster_path}
