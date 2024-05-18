@@ -4,13 +4,14 @@ import CardList from "../components/CardList.jsx";
 import Loading from "../components/Loading.jsx";
 import Pagination from "../components/Pagination.jsx";
 import Search from "../components/Search.jsx";
+import CardSlider from "../components/CardSlider.jsx";
 
 const Movies = ({handlePopularMovies}) => {
 
     const [movies, setMovies] = useState([])
     const [filteredMovies, setFilteredMovies] = useState([])
     const [pages, setPages] = useState(1)
-    const [moviesPerPage] = useState(3)
+    const [moviesPerPage] = useState(6)
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
@@ -50,25 +51,28 @@ const Movies = ({handlePopularMovies}) => {
     };
 
     return (
-        <div className="relative h-full">
+        <>
             {loading && <Loading/> }
-            <div>
                 <Search data={movies}
-                        dataType={'movies'}
+                        dataType={'movie'}
                         searchResults={setFilteredMovies}
                         setPages={setPages}
                 />
-                <CardList data={currentMovies}
-                          type={'movies'}
-                />
-                <Pagination pages={pages}
-                            dataPerPage={moviesPerPage}
-                            data={filteredMovies}
-                            nextPage={nextPage}
-                            prevPage={prevPage}
-                />
-            </div>
-        </div>
+                {currentMovies.length ?
+                    <>
+                        <CardList data={currentMovies}
+                                  type={'movies'}
+                        />
+                        <Pagination pages={pages}
+                                    dataPerPage={moviesPerPage}
+                                    data={filteredMovies}
+                                    nextPage={nextPage}
+                                    prevPage={prevPage}
+                        />
+                    </> :
+                    <p className="text-gray-300 text-center">No movies found</p>
+                }
+        </>
     );
 };
 export default Movies;

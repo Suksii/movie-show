@@ -2,11 +2,14 @@ import {MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight} from "react-ico
 
 const Pagination = ({prevPage, nextPage, dataPerPage, pages, data}) => {
 
+    const totalPages = Math.ceil(data.length / dataPerPage);
 
     return (
-        <div className="flex items-center justify-center my-12 text-white py-10">
+        <div className="flex items-center justify-center my-12 text-gray-300 py-10 text-xl">
             <button disabled={pages === 1}
-                    onClick={prevPage}>
+                    onClick={prevPage}
+                    className={`py-2 px-4 ${pages === 1 ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+            >
                 <MdOutlineKeyboardArrowLeft size={28}/>
             </button>
             <button className={`py-2 px-4 ${pages === 1 ? '' : 'cursor-pointer'}`}
@@ -15,15 +18,16 @@ const Pagination = ({prevPage, nextPage, dataPerPage, pages, data}) => {
                     onClick={prevPage}>
                 {pages === 1 ? '' : pages - 1}
             </button>
-            <button className="py-2 px-4 mx-3 cursor-pointer rounded-[50%] border-white border">
+            <button className="py-2 px-4 mx-3 cursor-pointer rounded-[50%] border-gray-300 border">
                 {pages}
             </button>
-            <button className={`py-2 px-4 ${Math.ceil(data.length / dataPerPage) ? '' : 'cursor-pointer'}`}
-                    disabled={pages === Math.ceil(data.length / dataPerPage)}
+            <button className={`py-2 px-4 ${totalPages ? '' : 'cursor-pointer'}`}
+                    disabled={pages === totalPages}
                     onClick={nextPage}>
-                {pages === Math.ceil(data.length / dataPerPage) ? '' : pages + 1}
+                {pages === totalPages ? '' : pages + 1}
             </button>
-            <button disabled={pages === Math.ceil(data.length / dataPerPage)}
+            <button disabled={pages === totalPages}
+                    className={`py-2 px-4 ${pages === totalPages ? 'cursor-not-allowed' : 'cursor-pointer'}`}
                     onClick={nextPage}>
                 <MdOutlineKeyboardArrowRight size={28}/>
             </button>

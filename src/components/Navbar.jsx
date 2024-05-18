@@ -1,3 +1,5 @@
+import {Link} from "react-router-dom";
+
 const Navbar = () => {
 
     const title = "Movies&TVShows";
@@ -10,7 +12,7 @@ const Navbar = () => {
     ]
 
     return (
-        <div className="flex p-2 pr-10">
+        <div className="flex p-2 py-4 pr-10">
             <p className="text-2xl italic">
                 {titleArray.map((part, index) => (
                     <span key={index} style={{ color: index === 1 ? 'white' : 'red' }}>{part}</span>
@@ -18,7 +20,7 @@ const Navbar = () => {
             </p>
             <div className="flex ml-auto gap-5">
                 {navLinks.map((link, index) => (
-                    <a key={index} href={link.path} className="text-white hover:text-red-500 duration-500">{link.title}</a>
+                    <Link key={index} to={link.path} className="text-gray-300 font-semibold text-xl hover:text-red-500 duration-500">{link.title}</Link>
                 ))}
             </div>
         </div>

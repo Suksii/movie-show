@@ -71,7 +71,7 @@ const Movie = () => {
                 <div className=" w-full" style={{flex:1}}>
                     <img src={movie.backdrop_path ? movie?.backdrop_path : movie?.poster_path}
                          alt={movie?.original_title}
-                         className="w-[600px] object-cover"/>
+                         className="w-[500px] object-cover"/>
                 </div>
                 <div className="text-gray-300" style={{flex: 1}}>
                     <div className="flex gap-4 py-5 items-center">
@@ -112,17 +112,17 @@ const Movie = () => {
                             <FaCopy size={22}/>
                             <p>Copy link</p>
                         </div>
-                        {movie.netflix && <div onClick={() => openLink(movie?.netflix)}
+                        {movie.netflix ? <div onClick={() => openLink(movie?.netflix)}
                               className="flex gap-2 justify-center py-3 px-2 min-w-[170px] bg-gray-300 w-fit items-center cursor-pointer">
                             <RiNetflixFill/>
                             <p>Watch on Netflix</p>
-                        </div>}
+                        </div> : null}
                     </div>
                 </div>
             </div>
             {/*<div>*/}
             {/*    <h1 className="text-3xl text-gray-300">Similar Movies</h1>*/}
-            {/*    <CardSlider data={similarMovies} type={'movies'}/>*/}
+            {/*    <CardSlider data={movie?.similar} type={"movies"}/>*/}
             {/*</div>*/}
         </>
 

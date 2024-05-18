@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import CardList from "./CardList.jsx";
+import {IoSearch} from "react-icons/io5";
 
 const Search = ({data, dataType, searchResults, setPages}) => {
 
@@ -22,12 +23,13 @@ const Search = ({data, dataType, searchResults, setPages}) => {
     }
 
     return (
-        <div>
+        <div className="relative flex justify-between w-full md:w-[600px] items-center">
             <input placeholder={`Search for ${dataType}`}
-                   className="w-1/2 p-2 rounded-lg m-5 bg-gray-800 text-white outline-none"
+                   className="w-full p-2 rounded-lg m-5 bg-gray-800 text-white outline-none"
                    type="text"
                    value={searchTerm}
                    onChange={handleChange}/>
+            <IoSearch size={20} color={'gray'} className="text-white absolute right-8"/>
         </div>
     );
 };

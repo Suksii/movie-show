@@ -17,18 +17,19 @@ function App() {
   }
 
   return (
-    <div className="bg-black">
-        <Navbar/>
-        <div className="py-12 px-5">
-            <Routes>
-                <Route path="/" element={<Home popularMovies={popularMovies} />}/>
-                <Route path="/tv-shows" element={<TVShows/>}/>
-                <Route path="/tv-shows/:id" element={<TvShow/>}/>
-                <Route path="/movies" element={<Movies handlePopularMovies={handlePopularMovies}/>}/>
-                <Route path="/movies/:id" element={<Movie/>}/>
-            </Routes>
-        </div>
-    </div>
+      <div className="bg-black h-screen">
+          <Navbar/>
+          <div className="px-5">
+              <Routes>
+                  <Route path="/" element={<Home popularMovies={popularMovies} />}/>
+                  <Route path="/tv-shows" element={<TVShows/>}/>
+                  <Route path="/tv-shows/:id" element={<TvShow/>}/>
+                  <Route path="/movies" element={<Movies handlePopularMovies={handlePopularMovies}/>}/>
+                  <Route path="/movies/:id" element={<Movie/>}/>
+              </Routes>
+          </div>
+      </div>
+
   )
 }
 
