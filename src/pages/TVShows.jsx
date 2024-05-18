@@ -3,12 +3,14 @@ import { fetchFromAPI } from '../utils/API.js';
 import CardList from "../components/CardList.jsx";
 import Loading from "../components/Loading.jsx";
 import Pagination from "../components/Pagination.jsx";
+import Search from "../components/Search.jsx";
 
 const TvShows = () => {
 
     const [tvShows, setTvShows] = useState([])
+    const [filteredTvShows, setFilteredTvShows] = useState([])
     const [pages, setPages] = useState(1)
-    const [TvShowsPerPage] = useState(5)
+    const [TvShowsPerPage] = useState(3)
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
@@ -16,9 +18,8 @@ const TvShows = () => {
             setLoading(true)
             try {
                 const response = await fetchFromAPI('shows')
-                // setPages(pages)
                 setTvShows(response)
-                console.log(response)
+                setFilteredTvShows(response)
             } catch (err) {
                 console.log(err)
             } finally {
@@ -28,22 +29,30 @@ const TvShows = () => {
         fetchTVShows()
     }, []);
 
-    const nextPage = () => {
-        setPages(prevState => prevState + 1)
-    }
     const prevPage = () => {
-        setPages(prevState => prevState - 1)
-    }
+        setPages(prev => Math.max(prev - 1, 1));
+    };
+
+    const nextPage = () => {
+        setPages(prev => Math.min(prev + 1, Math.ceil(filteredTvShows.length / TvShowsPerPage)));
+    };
 
     const indexOfLastTvShow = pages * TvShowsPerPage;
     const indexOfFirstTvShow = indexOfLastTvShow - TvShowsPerPage;
-    const currentTvShows = tvShows.slice(indexOfFirstTvShow, indexOfLastTvShow);
+    const currentTvShows = filteredTvShows.slice(indexOfFirstTvShow, indexOfLastTvShow);
 
     return (
         <div className="relative h-full">
                 {loading && <Loading/> }
             <div>
-                <CardList data={currentTvShows} type={'tv-shows'}/>
+                <Search data={tvShows}
+                        dataType={'TV Show'}
+                        searchResults={setFilteredTvShows}
+                        setPages={setPages}
+                />
+                <CardList data={currentTvShows}
+                          type={'tv-shows'}
+                />
                 <Pagination nextPage={nextPage}
                             prevPage={prevPage}
                             pages={pages}
