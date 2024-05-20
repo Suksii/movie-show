@@ -58,19 +58,17 @@ const Movies = ({handlePopularMovies}) => {
                         searchResults={setFilteredMovies}
                         setPages={setPages}
                 />
-                {currentMovies.length ?
-                    <>
-                        <CardList data={currentMovies}
-                                  type={'movies'}
-                        />
-                        <Pagination pages={pages}
-                                    dataPerPage={moviesPerPage}
-                                    data={filteredMovies}
-                                    nextPage={nextPage}
-                                    prevPage={prevPage}
-                        />
-                    </> :
-                    <p className="text-gray-300 text-center">No movies found</p>
+                <CardList data={currentMovies}
+                          type={'movies'}
+                />
+                {currentMovies.length > 0 ?
+                <Pagination pages={pages}
+                            dataPerPage={moviesPerPage}
+                            data={filteredMovies}
+                            nextPage={nextPage}
+                            prevPage={prevPage}
+                />
+                    : <p className="text-gray-300 text-center text-2xl pt-12">No movies found</p>
                 }
         </>
     );

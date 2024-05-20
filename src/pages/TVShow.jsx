@@ -4,6 +4,7 @@ import {useParams} from "react-router-dom";
 import Loading from "../components/Loading.jsx";
 import {FaCopy, FaShare, FaYoutube} from "react-icons/fa6";
 import {RiNetflixFill} from "react-icons/ri";
+import Ratings from "../components/Ratings.jsx";
 
 const TvShow = () => {
 
@@ -37,6 +38,7 @@ const TvShow = () => {
     const releaseDate = TvShow?.release_date?.slice(0, 4)
     const runtimeHours = Math.floor(TvShow?.runtime / 60) + 'h'
     const runtimeMinutes = TvShow?.runtime % 60 + 'min'
+    const percetage = TvShow?.vote_average * 10
 
     return (
         <>
@@ -49,10 +51,12 @@ const TvShow = () => {
                 </div>
                 <div className="text-gray-300" style={{flex: 1}}>
                     <div className="flex gap-4 py-5 items-center">
-                        <div className="flex flex-col justify-center items-center">
-                            <h2 className="text-3xl" title={TvShow?.vote_average}>{TvShow?.vote_average?.toFixed(2)}</h2>
-                            <p>{votes}</p>
-                        </div>
+                        <Ratings percetage={percetage} circleSize={"200"}>
+                            <div className="flex flex-col justify-center items-center">
+                                <h2 className="text-3xl" title={TvShow?.vote_average}>{TvShow?.vote_average?.toFixed(2)}</h2>
+                                <p>{votes}</p>
+                            </div>
+                        </Ratings>
                         <h1 className="text-4xl">{TvShow?.title}</h1>
                     </div>
                     <div className="flex gap-5 items-center border-y border-gray-900 w-fit">

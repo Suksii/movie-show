@@ -7,11 +7,12 @@ import {RiNetflixFill} from "react-icons/ri";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CardSlider from "../components/CardSlider.jsx";
+import Ratings from "../components/Ratings.jsx";
 
 const Movie = () => {
 
     const [movie, setMovie] = useState([])
-    // const [similarMovies, setSimilarMovies] = useState([])
+    const [similarMovies, setSimilarMovies] = useState([])
     const [loading, setLoading] = useState(false)
     const {id} = useParams();
 
@@ -22,7 +23,7 @@ const Movie = () => {
                 const response = await fetchFromAPI(`movies/${id}`)
                 console.log(response)
                 setMovie(response)
-                // setSimilarMovies(similarMovies)
+
             } catch (err) {
                 console.log(err)
             } finally {
@@ -62,6 +63,7 @@ const Movie = () => {
     const releaseDate = movie?.release_date?.slice(0, 4)
     const runtimeHours = Math.floor(movie?.runtime / 60) + 'h'
     const runtimeMinutes = movie?.runtime % 60 + 'min'
+    const percetage = movie?.vote_average * 10
 
     return (
         <>
@@ -75,10 +77,12 @@ const Movie = () => {
                 </div>
                 <div className="text-gray-300" style={{flex: 1}}>
                     <div className="flex gap-4 py-5 items-center">
+                        <Ratings percetage={percetage} circleSize={"200"}>
                         <div className="flex flex-col justify-center items-center">
                             <h2 className="text-3xl" title={movie?.vote_average}>{movie?.vote_average?.toFixed(2)}</h2>
                             <p>{votes}</p>
                         </div>
+                        </Ratings>
                         <h1 className="text-4xl">{movie?.title}</h1>
                     </div>
                     <div className="flex gap-5 items-center border-y border-gray-900 w-fit">
@@ -120,10 +124,11 @@ const Movie = () => {
                     </div>
                 </div>
             </div>
-            {/*<div>*/}
-            {/*    <h1 className="text-3xl text-gray-300">Similar Movies</h1>*/}
-            {/*    <CardSlider data={movie?.similar} type={"movies"}/>*/}
-            {/*</div>*/}
+            <div>
+                <h1 className="text-3xl text-gray-300">Similar Movies</h1>
+                {/*<CardSlider data={movie?.similar} type={"movies"}/>*/}
+                <Ratings percetage={percetage} circleSize={"200"}/>
+            </div>
         </>
 
     );

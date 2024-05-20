@@ -50,19 +50,17 @@ const TvShows = () => {
                         searchResults={setFilteredTvShows}
                         setPages={setPages}
                 />
-                {currentTvShows.length ?
-                    <>
                         <CardList data={currentTvShows}
                               type={'tv-shows'}
                         />
-                        <Pagination nextPage={nextPage}
-                                     prevPage={prevPage}
-                                     pages={pages}
-                                     data={tvShows}
-                                     dataPerPage={TvShowsPerPage}
-                        />
-                    </> :
-                    <p className="text-gray-300 text-center">No TV Shows Found</p>
+                {tvShows.length > 0 ?
+                    <Pagination nextPage={nextPage}
+                                 prevPage={prevPage}
+                                 pages={pages}
+                                 data={tvShows}
+                                 dataPerPage={TvShowsPerPage}
+                    /> :
+                    <p className="text-gray-300 text-center text-2xl pt-12">No TV shows found</p>
                 }
             </div>
         </div>

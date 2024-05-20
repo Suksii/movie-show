@@ -17,7 +17,7 @@ function App() {
   }
 
   return (
-      <div className="bg-black h-screen">
+      <div className="relative bg-black h-screen">
           <Navbar/>
           <div className="px-5">
               <Routes>
