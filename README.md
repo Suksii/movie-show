@@ -45,7 +45,7 @@ This project is a web application built with React.js that allows users to brows
 
 
 ## Installation
-   1. git clone https://github.com/yourusername/movie-tv-show.git
+   1. git clone `https://github.com/Suksii/movie-show.git`
    2. cd movie-show
    3. npm install
    4. json-server --watch db.json --port 3001
