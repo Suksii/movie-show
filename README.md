@@ -2,7 +2,8 @@
 
 ## About
 
-This project is a web application built with React.js that allows users to browse, search, and interact with a collection of movies and TV shows. The application includes features such as loading spinners, search functionality, pagination, ratings display, and more. It leverages various JavaScript functionalities, React hooks, and libraries to provide a dynamic and user-friendly experience.
+This project is a web application built with React.js that allows users to browse, search, and interact with a collection of movies and TV shows. The application includes features such as loading spinners, search functionality, pagination, ratings display, and more. It leverages various JavaScript functionalities, React hooks, and libraries to provide a dynamic and user-friendly experience.<br/>
+I initially started working with the Rapid API, but encountered limitations due to the restricted number of requests. Consequently, I opted to create a fake API using the JSON Server library, along with a `db.json` file.
 
 ## Features
 
@@ -45,9 +46,9 @@ This project is a web application built with React.js that allows users to brows
 
 
 ## Installation
-   1. git clone `https://github.com/Suksii/movie-show.git`
-   2. cd movie-show
-   3. npm install
-   4. json-server --watch db.json --port 3001
-   5. npm run dev
+   1. Clone the repository: `git clone --single-branch --branch master "https://github.com/Suksii/movie-show.git"`
+   2. Find the location: `cd movie-show`
+   3. Install dependencies: `npm install`
+   4. Run json-server: `json-server --watch db.json --port 3001`
+   5. Run the application: `npm run dev`
    
