@@ -2,17 +2,14 @@ import React, {useEffect, useState} from 'react';
 import {fetchFromAPI} from "../utils/API.js";
 import {useParams} from "react-router-dom";
 import Loading from "../components/Loading.jsx";
-import {FaCopy, FaShare, FaYoutube} from "react-icons/fa6";
-import {RiNetflixFill} from "react-icons/ri";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import CardSlider from "../components/CardSlider.jsx";
+import { ToastContainer } from 'react-toastify';
 import Ratings from "../components/Ratings.jsx";
+import CountUp from "react-countup";
+import Actions from "../components/Actions.jsx";
 
 const Movie = () => {
 
     const [movie, setMovie] = useState([])
-    const [similarMovies, setSimilarMovies] = useState([])
     const [loading, setLoading] = useState(false)
     const {id} = useParams();
 
@@ -33,29 +30,6 @@ const Movie = () => {
         fetchMovie()
     }, [id]);
 
-    const openLink = (url) => {
-        window.open(url)
-    }
-
-    const copyLinkFromUrl = () => {
-        navigator.clipboard.writeText(window.location.href)
-        if (navigator.clipboard.writeText) {
-            toast.success('Link copied to clipboard')
-        } else {
-            toast.error('Failed to copy link to clipboard')
-        }
-    }
-
-    const shareLinkOnSocialMedia = () => {
-        navigator.share({
-            title: 'Movie Show',
-            text: 'Check out this movie',
-            url: window.location.href
-        })
-            .then(() => console.log('Successful share'))
-            .catch((error) => console.log('Error sharing', error));
-    }
-
     const votes = movie?.vote_count?.toString().length === 7 ? movie?.vote_count / 1000000 + 'M' : movie?.vote_count / 1000 + 'K';
     const directors = movie?.directors?.map(director => director).join(', ')
     const mainCast = movie?.cast?.slice(0, 3).map(actor => actor).join(', ')
@@ -63,7 +37,7 @@ const Movie = () => {
     const releaseDate = movie?.release_date?.slice(0, 4)
     const runtimeHours = Math.floor(movie?.runtime / 60) + 'h'
     const runtimeMinutes = movie?.runtime % 60 + 'min'
-    const percetage = movie?.vote_average * 10
+    const percentage = movie?.vote_average * 10
 
     return (
         <>
@@ -77,9 +51,14 @@ const Movie = () => {
                 </div>
                 <div className="text-gray-300" style={{flex: 1}}>
                     <div className="flex gap-4 py-5 items-center">
-                        <Ratings percetage={percetage} circleSize={"200"}>
+                        <Ratings percentage={percentage} circleSize={"200"}>
                         <div className="flex flex-col justify-center items-center">
-                            <h2 className="text-3xl" title={movie?.vote_average}>{movie?.vote_average?.toFixed(2)}</h2>
+                            <CountUp start={0}
+                                     end={movie?.vote_average}
+                                     decimals={2}
+                                     duration={1.5}
+                                     className={"text-3xl"}
+                            />
                             <p>{votes}</p>
                         </div>
                         </Ratings>
@@ -102,35 +81,12 @@ const Movie = () => {
                         <p className="flex gap-5 items-center py-2 border-b border-gray-400">Actors: <span>{mainCast}</span></p>
                         <p className="flex gap-5 items-center py-2 border-b border-gray-400">Other Actors: <span>{otherCast}</span></p>
                     </div>
-
-                    <div className="text-black flex flex-col gap-2">
-                        <div onClick={() => openLink(movie?.youtube_trailer)} className="flex gap-2 justify-center py-3 px-2 min-w-[170px] text-center bg-gray-300 w-fit items-center cursor-pointer">
-                            <FaYoutube size={22}/>
-                            <p>Watch trailer</p>
-                        </div>
-                        <div onClick={shareLinkOnSocialMedia} className="flex gap-2 justify-center py-3 px-2 min-w-[170px] bg-gray-300 w-fit items-center cursor-pointer">
-                            <FaShare size={22}/>
-                            <p>Share link</p>
-                        </div>
-                        <div onClick={copyLinkFromUrl} className="flex gap-2 justify-center py-3 px-2 min-w-[170px] text-center bg-gray-300 w-fit items-center cursor-pointer">
-                            <FaCopy size={22}/>
-                            <p>Copy link</p>
-                        </div>
-                        {movie.netflix ? <div onClick={() => openLink(movie?.netflix)}
-                              className="flex gap-2 justify-center py-3 px-2 min-w-[170px] bg-gray-300 w-fit items-center cursor-pointer">
-                            <RiNetflixFill/>
-                            <p>Watch on Netflix</p>
-                        </div> : null}
-                    </div>
+                    <Actions title={"Movie"}
+                             trailer={movie?.youtube_trailer}
+                             netflix={movie?.netflix} />
                 </div>
             </div>
-            <div>
-                <h1 className="text-3xl text-gray-300">Similar Movies</h1>
-                {/*<CardSlider data={movie?.similar} type={"movies"}/>*/}
-                <Ratings percetage={percetage} circleSize={"200"}/>
-            </div>
         </>
-
     );
 };
 export default Movie;

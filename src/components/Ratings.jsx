@@ -1,11 +1,24 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
-const Ratings = ({percetage, circleSize, children}) => {
+const Ratings = ({percentage = 0, circleSize, children}) => {
 
 
     const radius = 50;
     const dashArray = 2 * Math.PI * radius;
-    const dashOffset = dashArray - dashArray * percetage / 100;
+    const initialOffset = dashArray;
+    const [dashOffset, setDashOffset] = useState(initialOffset);
+
+    useEffect(() => {
+        setDashOffset(initialOffset);
+    }, [percentage, initialOffset]);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setDashOffset(dashArray - (dashArray * percentage) / 100);
+        }, 100);
+
+        return () => clearTimeout(timer);
+    }, [percentage, dashArray]);
 
     return (
         <div className="relative w-fit">
@@ -23,13 +36,15 @@ const Ratings = ({percetage, circleSize, children}) => {
                         cy={circleSize / 2}
                         r={radius}
                         strokeWidth="12"
+                        strokeLinecap={"round"}
+                        strokeLinejoin={"round"}
+                        strokeMiterlimit={10}
                         stroke={"#f59e0b"}
                         strokeDasharray={dashArray}
                         strokeDashoffset={dashOffset}
-                        className={"fill-none stroke-gray-600 transform -rotate-90 origin-center rounded-full transition-all duration-1000 ease-in-out"}
+                        className={"fill-none transform -rotate-90 origin-center transition-all duration-1000 ease-in-out"}
                 >
                 </circle>
-
             </svg>
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                 {children}

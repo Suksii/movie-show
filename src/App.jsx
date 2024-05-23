@@ -6,7 +6,7 @@ import Navbar from "./components/Navbar.jsx";
 import Movies from "./pages/Movies.jsx";
 import Movie from "./pages/Movie.jsx";
 import {useMemo, useState} from "react";
-import CardList from "./components/CardList.jsx";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
