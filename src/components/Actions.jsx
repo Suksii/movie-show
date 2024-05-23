@@ -42,8 +42,7 @@ const Actions = ({title, trailer, netflix}) => {
                 <FaCopy size={22}/>
                 <p>Copy link</p>
             </div>
-            {netflix ? <div onClick={() => openLink(netflix)}
-                                  className="flex gap-2 justify-center py-3 px-2 min-w-[170px] bg-gray-300 w-fit items-center cursor-pointer">
+            {netflix ? <div onClick={() => openLink(netflix)} className="flex gap-2 justify-center py-3 px-2 min-w-[170px] bg-gray-300 w-fit items-center cursor-pointer">
                 <RiNetflixFill/>
                 <p>Watch on Netflix</p>
             </div> : null}

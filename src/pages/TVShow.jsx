@@ -33,8 +33,9 @@ const TvShow = () => {
     const mainCast = TvShow?.cast?.slice(0, 3).map(actor => actor).join(', ')
     const otherCast = TvShow?.cast?.slice(3).map(actor => actor).join(', ')
     const releaseDate = TvShow?.release_date?.slice(0, 4)
-    const runtimeHours = Math.floor(TvShow?.runtime / 60) + 'h'
-    const runtimeMinutes = TvShow?.runtime % 60 + 'min'
+    const endYear = TvShow?.ended?.slice(0, 4)
+    const runtimeHours = Math.floor(TvShow?.runtime / 60) > 0 ? Math.floor(TvShow?.runtime / 60) + 'h' : ''
+    const runtimeMinutes = TvShow?.runtime % 60 > 0 ? TvShow?.runtime % 60 + 'min' : ''
     const percentage = TvShow?.vote_average * 10
 
     return (
@@ -60,10 +61,18 @@ const TvShow = () => {
                                 <p>{votes}</p>
                             </div>
                         </Ratings>
-                        <h1 className="text-4xl">{TvShow?.title}</h1>
+                        <div className="flex flex-col justify-between gap-4">
+                            <h1 className="text-4xl">{TvShow?.title}</h1>
+                            <div className="flex gap-5 items-center border-y border-gray-900 w-fit">
+                                <p className="text-md"><span className="text-xl">{TvShow?.seasons}</span> Seasons</p>
+                                <p className="rounded-full border-2 border-gray-800"></p>
+                                <p className="text-md"><span className="text-xl">{TvShow?.episodes}</span> Episodes</p>
+                            </div>
+                        </div>
+
                     </div>
                     <div className="flex gap-5 items-center border-y border-gray-900 w-fit">
-                        <p>{releaseDate}</p>
+                        <p>{releaseDate} - {endYear ? endYear : "Ongoing"}</p>
                         <p className="rounded-full border-2 border-gray-800"></p>
                         <p>{runtimeHours} {runtimeMinutes}</p>
                     </div>

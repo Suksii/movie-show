@@ -1,12 +1,17 @@
 import React from 'react';
 import Popular from "../components/Popular.jsx";
-import CardList from "../components/CardList.jsx";
 
-const Home = ({popularMovies}) => {
+const Home = () => {
     return (
-        <div className="h-full">
-            <h1 className="text-white text-3xl font-bold ml-10">Popular Movies</h1>
-            <CardList data={popularMovies} type={'movies'}/>
+        <div>
+            <Popular title={"Popular movies"}
+                     fetchedData={'movies'}
+                        type={"movies"}
+            />
+            <Popular title={"Popular TV Shows"}
+                     fetchedData={'shows'}
+                     type={"tv-shows"}
+            />
         </div>
     );
 };

@@ -19,3 +19,20 @@
 .rotateY {
     transform: rotateY(180deg);
 }
+
+.arrow-right {
+    position: absolute;
+    top: 50%;
+    right: -50px;
+    padding: 0 15px;
+    color: white;
+    cursor: pointer;
+}
+.arrow-left {
+    position: absolute;
+    top: 50%;
+    left: -50px;
+    padding: 0 15px;
+    color: white;
+    cursor: pointer;
+}

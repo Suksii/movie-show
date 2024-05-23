@@ -4,9 +4,8 @@ import CardList from "../components/CardList.jsx";
 import Loading from "../components/Loading.jsx";
 import Pagination from "../components/Pagination.jsx";
 import Search from "../components/Search.jsx";
-import CardSlider from "../components/CardSlider.jsx";
 
-const Movies = ({handlePopularMovies}) => {
+const Movies = () => {
 
     const [movies, setMovies] = useState([])
     const [filteredMovies, setFilteredMovies] = useState([])
@@ -30,13 +29,6 @@ const Movies = ({handlePopularMovies}) => {
         fetchMovies()
     }, []);
 
-    // const popularMovies = useMemo(() => {
-    //     return movies.filter(movie => movie?.popular === true);
-    // }, [movies]);
-    //
-    // useEffect(() => {
-    //     handlePopularMovies(popularMovies)
-    // }, [popularMovies, handlePopularMovies]);
 
     const indexOfLastMovie = pages * moviesPerPage;
     const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;

@@ -10,21 +10,15 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
-  const [popularMovies, setPopularMovies] = useState([]);
-
-  const handlePopularMovies = (movies) => {
-    setPopularMovies(movies)
-  }
-
   return (
       <div className="relative bg-black h-screen">
           <Navbar/>
           <div className="px-5">
               <Routes>
-                  <Route path="/" element={<Home popularMovies={popularMovies} />}/>
+                  <Route path="/" element={<Home />}/>
                   <Route path="/tv-shows" element={<TVShows/>}/>
                   <Route path="/tv-shows/:id" element={<TvShow/>}/>
-                  <Route path="/movies" element={<Movies handlePopularMovies={handlePopularMovies}/>}/>
+                  <Route path="/movies" element={<Movies />}/>
                   <Route path="/movies/:id" element={<Movie/>}/>
               </Routes>
           </div>
