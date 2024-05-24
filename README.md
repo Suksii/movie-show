@@ -32,7 +32,7 @@ I initially started working with the Rapid API, but encountered limitations due 
 
 ## JavaScript Functionalities
 
-- **Array Methods**: `map`, `slice`.
+- **Array Methods**: `map`, `slice`, `split`.
 - **Math Methods**: `Math.ceil`, `Math.floor`, `Math.PI`, `Math.min`, `Math.max`.
 - **String Methods**: `toString`.
 - **Timeouts**: `setTimeout`, `clearTimeout`.
