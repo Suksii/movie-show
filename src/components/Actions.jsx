@@ -29,7 +29,7 @@ const Actions = ({title, trailer, netflix}) => {
     }
 
     return (
-        <div className="text-black flex flex-col gap-2">
+        <div className="text-black flex flex-col flex-row gap-2">
             <div onClick={() => openLink(trailer)} className="flex gap-2 justify-center py-3 px-2 min-w-[170px] text-center bg-gray-300 w-fit items-center cursor-pointer">
                 <FaYoutube size={22}/>
                 <p>Watch trailer</p>

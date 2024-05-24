@@ -12,8 +12,7 @@ const TvShow = () => {
     const [TvShow, setTvShow] = useState([])
     const [loading, setLoading] = useState(false)
     const {id} = useParams();
-    //https://www.youtube.com/watch?v=xNRJwmlRBNU&t=365s
-    //https://www.youtube.com/embed/xNRJwmlRBNU
+
 
     useEffect(() => {
         const fetchTVShow = async () => {
@@ -40,20 +39,19 @@ const TvShow = () => {
     const runtimeMinutes = TvShow?.runtime % 60 > 0 ? TvShow?.runtime % 60 + 'min' : ''
     const percentage = TvShow?.vote_average * 10
     const embedId = TvShow?.youtube_trailer?.split('v=')[1]
-    console.log(embedId, TvShow?.youtube_trailer)
 
     return (
         <>
             {loading && <Loading />}
             <ToastContainer position={"top-center"} autoClose={1000}/>
-            <div className="flex md:flex-row flex-col gap-10 md:w-[90%] mx-auto py-12 h-screen">
-                <div className=" w-full" style={{flex:1}}>
+            <div className="flex xl:flex-row flex-col gap-10 md:w-[90%] mx-auto py-12">
+                <div className="w-full md:py-10" style={{flex:1}}>
                     <img src={TvShow.backdrop_path ? TvShow?.backdrop_path : TvShow?.poster_path}
                          alt={TvShow?.original_title}
-                         className="w-[600px] object-cover"/>
+                         className="w-[600px] object-cover mx-auto"/>
                 </div>
                 <div className="text-gray-300" style={{flex: 1}}>
-                    <div className="flex gap-4 py-5 items-center">
+                    <div className="flex md:gap-4 xl:py-5 items-center">
                         <Ratings percentage={percentage} circleSize={"200"}>
                             <div className="flex flex-col justify-center items-center">
                                 <CountUp start={0}
@@ -92,12 +90,12 @@ const TvShow = () => {
                         <p className="flex gap-5 items-center py-2 border-b border-gray-400">Actors: <span>{mainCast}</span></p>
                         <p className="flex gap-5 items-center py-2 border-b border-gray-400">Other Actors: <span>{otherCast}</span></p>
                     </div>
-                    <div className="flex justify-around items-center">
+                    <div className="flex justify-around gap-2 flex-col md:flex-row items-center">
                         <Actions title={"TV Show"}
                                  trailer={TvShow?.youtube_trailer}
                                  netflix={TvShow?.netflix}
                         />
-                        <iframe width={500} height={300} src={`https://www.youtube.com/embed/${embedId}`} allowFullScreen></iframe>
+                        <iframe className="w-full md:w-[500px] h-[300px]" src={`https://www.youtube.com/embed/${embedId}`} allowFullScreen></iframe>
                     </div>
                 </div>
             </div>

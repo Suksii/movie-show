@@ -12,7 +12,6 @@ const Navbar = () => {
     ]
 
     const path = useLocation().pathname;
-    console.log(path)
 
     return (
         <div className="flex p-2 py-4 pr-10 flex-col md:flex-row items-center md:justify-between">

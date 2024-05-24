@@ -18,7 +18,6 @@ const Movie = () => {
             setLoading(true)
             try {
                 const response = await fetchFromAPI(`movies/${id}`)
-                console.log(response)
                 setMovie(response)
 
             } catch (err) {
@@ -35,8 +34,8 @@ const Movie = () => {
     const mainCast = movie?.cast?.slice(0, 3).map(actor => actor).join(', ')
     const otherCast = movie?.cast?.slice(3).map(actor => actor).join(', ')
     const releaseDate = movie?.release_date?.slice(0, 4)
-    const runtimeHours = Math.floor(movie?.runtime / 60) + 'h'
-    const runtimeMinutes = movie?.runtime % 60 + 'min'
+    const runtimeHours = Math.floor(movie?.runtime / 60) > 0 ? Math.floor(movie?.runtime / 60) + 'h' : ''
+    const runtimeMinutes = movie?.runtime % 60 ? movie?.runtime % 60 + 'min' : ''
     const percentage = movie?.vote_average * 10
     const embedId = movie?.youtube_trailer?.split('v=')[1]
 
@@ -44,14 +43,14 @@ const Movie = () => {
         <>
             {loading && <Loading />}
             <ToastContainer position={"top-center"} autoClose={1000}/>
-            <div className="flex md:flex-row flex-col gap-10 md:w-[90%] mx-auto py-10 h-screen">
-                <div className=" w-full" style={{flex:1}}>
+            <div className="flex xl:flex-row flex-col gap-10 md:w-[90%] mx-auto py-12">
+                <div className="w-full md:py-10" style={{flex:1}}>
                     <img src={movie.backdrop_path ? movie?.backdrop_path : movie?.poster_path}
                          alt={movie?.original_title}
-                         className="w-[500px] object-cover"/>
+                         className="w-[500px] object-cover mx-auto"/>
                 </div>
                 <div className="text-gray-300" style={{flex: 1}}>
-                    <div className="flex gap-4 py-5 items-center">
+                    <div className="flex md:gap-4 xl:py-5 items-center">
                         <Ratings percentage={percentage} circleSize={"200"}>
                         <div className="flex flex-col justify-center items-center">
                             <CountUp start={0}
@@ -82,11 +81,11 @@ const Movie = () => {
                         <p className="flex gap-5 items-center py-2 border-b border-gray-400">Actors: <span>{mainCast}</span></p>
                         <p className="flex gap-5 items-center py-2 border-b border-gray-400">Other Actors: <span>{otherCast}</span></p>
                     </div>
-                    <div className="flex justify-around items-center">
+                    <div className="flex justify-around gap-2 flex-col md:flex-row items-center">
                         <Actions title={"Movie"}
                                  trailer={movie?.youtube_trailer}
                                  netflix={movie?.netflix} />
-                        <iframe width={500} height={300} src={`https://www.youtube.com/embed/${embedId}`} allowFullScreen></iframe>
+                        <iframe className="w-full md:w-[500px] h-[300px]" src={`https://www.youtube.com/embed/${embedId}`} allowFullScreen></iframe>
                     </div>
 
                 </div>
