@@ -8,14 +8,14 @@ const CardSlider = ({data, type}) => {
 
     const NextArrow = ({style, onClick}) => {
         return (
-            <div style={{...style}} className="arrow-right hover:text-fuchsia-500 duration-500" onClick={onClick}>
+            <div style={{...style}} className="arrow-right hover:text-red-600 duration-500" onClick={onClick}>
                 <FaArrowRight size={26} />
             </div>
         )
     }
     const PrevArrow = ({style, onClick}) => {
         return (
-            <div style={{...style}} className="arrow-left hover:text-fuchsia-500 duration-500" onClick={onClick}>
+            <div style={{...style}} className="arrow-left hover:text-red-600 duration-500" onClick={onClick}>
                 <FaArrowLeft size={26} />
             </div>
         )

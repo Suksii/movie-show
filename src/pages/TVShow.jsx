@@ -12,6 +12,8 @@ const TvShow = () => {
     const [TvShow, setTvShow] = useState([])
     const [loading, setLoading] = useState(false)
     const {id} = useParams();
+    //https://www.youtube.com/watch?v=xNRJwmlRBNU&t=365s
+    //https://www.youtube.com/embed/xNRJwmlRBNU
 
     useEffect(() => {
         const fetchTVShow = async () => {
@@ -37,12 +39,14 @@ const TvShow = () => {
     const runtimeHours = Math.floor(TvShow?.runtime / 60) > 0 ? Math.floor(TvShow?.runtime / 60) + 'h' : ''
     const runtimeMinutes = TvShow?.runtime % 60 > 0 ? TvShow?.runtime % 60 + 'min' : ''
     const percentage = TvShow?.vote_average * 10
+    const embedId = TvShow?.youtube_trailer?.split('v=')[1]
+    console.log(embedId, TvShow?.youtube_trailer)
 
     return (
         <>
             {loading && <Loading />}
             <ToastContainer position={"top-center"} autoClose={1000}/>
-            <div className="flex md:flex-row flex-col gap-10 md:w-[90%] mx-auto py-10 h-screen">
+            <div className="flex md:flex-row flex-col gap-10 md:w-[90%] mx-auto py-12 h-screen">
                 <div className=" w-full" style={{flex:1}}>
                     <img src={TvShow.backdrop_path ? TvShow?.backdrop_path : TvShow?.poster_path}
                          alt={TvShow?.original_title}
@@ -64,9 +68,9 @@ const TvShow = () => {
                         <div className="flex flex-col justify-between gap-4">
                             <h1 className="text-4xl">{TvShow?.title}</h1>
                             <div className="flex gap-5 items-center border-y border-gray-900 w-fit">
-                                <p className="text-md"><span className="text-xl">{TvShow?.seasons}</span> Seasons</p>
+                                <p className="text-md"><span className="text-xl text-red-600">{TvShow?.seasons}</span> Seasons</p>
                                 <p className="rounded-full border-2 border-gray-800"></p>
-                                <p className="text-md"><span className="text-xl">{TvShow?.episodes}</span> Episodes</p>
+                                <p className="text-md"><span className="text-xl text-red-600">{TvShow?.episodes}</span> Episodes</p>
                             </div>
                         </div>
 
@@ -88,10 +92,13 @@ const TvShow = () => {
                         <p className="flex gap-5 items-center py-2 border-b border-gray-400">Actors: <span>{mainCast}</span></p>
                         <p className="flex gap-5 items-center py-2 border-b border-gray-400">Other Actors: <span>{otherCast}</span></p>
                     </div>
-                <Actions title={"TV Show"}
-                         trailer={TvShow?.youtube_trailer}
-                         netflix={TvShow?.netflix}
-                />
+                    <div className="flex justify-around items-center">
+                        <Actions title={"TV Show"}
+                                 trailer={TvShow?.youtube_trailer}
+                                 netflix={TvShow?.netflix}
+                        />
+                        <iframe width={500} height={300} src={`https://www.youtube.com/embed/${embedId}`} allowFullScreen></iframe>
+                    </div>
                 </div>
             </div>
         </>

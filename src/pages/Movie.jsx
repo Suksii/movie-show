@@ -38,6 +38,7 @@ const Movie = () => {
     const runtimeHours = Math.floor(movie?.runtime / 60) + 'h'
     const runtimeMinutes = movie?.runtime % 60 + 'min'
     const percentage = movie?.vote_average * 10
+    const embedId = movie?.youtube_trailer?.split('v=')[1]
 
     return (
         <>
@@ -81,9 +82,13 @@ const Movie = () => {
                         <p className="flex gap-5 items-center py-2 border-b border-gray-400">Actors: <span>{mainCast}</span></p>
                         <p className="flex gap-5 items-center py-2 border-b border-gray-400">Other Actors: <span>{otherCast}</span></p>
                     </div>
-                    <Actions title={"Movie"}
-                             trailer={movie?.youtube_trailer}
-                             netflix={movie?.netflix} />
+                    <div className="flex justify-around items-center">
+                        <Actions title={"Movie"}
+                                 trailer={movie?.youtube_trailer}
+                                 netflix={movie?.netflix} />
+                        <iframe width={500} height={300} src={`https://www.youtube.com/embed/${embedId}`} allowFullScreen></iframe>
+                    </div>
+
                 </div>
             </div>
         </>

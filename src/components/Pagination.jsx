@@ -8,7 +8,7 @@ const Pagination = ({prevPage, nextPage, dataPerPage, pages, data}) => {
         <div className="flex items-center justify-center my-12 text-gray-300 py-10 text-xl">
             <button disabled={pages === 1}
                     onClick={prevPage}
-                    className={`py-2 px-4 ${pages === 1 ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+                    className={`py-2 px-4 ${pages === 1 ? 'cursor-not-allowed' : 'hover:text-red-600 transition-colors duration-500 cursor-pointer'}`}
             >
                 <MdOutlineKeyboardArrowLeft size={28}/>
             </button>
@@ -27,7 +27,7 @@ const Pagination = ({prevPage, nextPage, dataPerPage, pages, data}) => {
                 {pages === totalPages ? '' : pages + 1}
             </button>
             <button disabled={pages === totalPages}
-                    className={`py-2 px-4 ${pages === totalPages ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+                    className={`py-2 px-4 ${pages === totalPages ? 'cursor-not-allowed' : 'hover:text-red-600 cursor-pointer transition-colors duration-500'}`}
                     onClick={nextPage}>
                 <MdOutlineKeyboardArrowRight size={28}/>
             </button>

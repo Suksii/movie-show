@@ -10,7 +10,7 @@ const Movies = () => {
     const [movies, setMovies] = useState([])
     const [filteredMovies, setFilteredMovies] = useState([])
     const [pages, setPages] = useState(1)
-    const [moviesPerPage] = useState(6)
+    const [moviesPerPage] = useState(5)
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
@@ -45,6 +45,7 @@ const Movies = () => {
     return (
         <>
             {loading && <Loading/> }
+            <div className="flex flex-col justify-between h-[90vh]">
                 <Search data={movies}
                         dataType={'movie'}
                         searchResults={setFilteredMovies}
@@ -54,14 +55,15 @@ const Movies = () => {
                           type={'movies'}
                 />
                 {currentMovies.length > 0 ?
-                <Pagination pages={pages}
-                            dataPerPage={moviesPerPage}
-                            data={filteredMovies}
-                            nextPage={nextPage}
-                            prevPage={prevPage}
-                />
+                    <Pagination pages={pages}
+                                dataPerPage={moviesPerPage}
+                                data={filteredMovies}
+                                nextPage={nextPage}
+                                prevPage={prevPage}
+                    />
                     : <p className="text-gray-300 text-center text-2xl pt-12">No movies found</p>
                 }
+            </div>
         </>
     );
 };

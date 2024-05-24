@@ -39,7 +39,7 @@ const Ratings = ({percentage = 0, circleSize, children}) => {
                         strokeLinecap={"round"}
                         strokeLinejoin={"round"}
                         strokeMiterlimit={10}
-                        stroke={"#f59e0b"}
+                        stroke={"red"}
                         strokeDasharray={dashArray}
                         strokeDashoffset={dashOffset}
                         className={"fill-none transform -rotate-90 origin-center transition-all duration-1000 ease-in-out"}

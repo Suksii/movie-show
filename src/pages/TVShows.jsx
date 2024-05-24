@@ -10,7 +10,7 @@ const TvShows = () => {
     const [tvShows, setTvShows] = useState([])
     const [filteredTvShows, setFilteredTvShows] = useState([])
     const [pages, setPages] = useState(1)
-    const [TvShowsPerPage] = useState(3)
+    const [TvShowsPerPage] = useState(5)
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
@@ -43,8 +43,8 @@ const TvShows = () => {
 
     return (
         <div className="relative h-full">
-                {loading && <Loading/> }
-            <div>
+            {loading && <Loading/> }
+            <div className="flex flex-col justify-between h-[90vh]">
                 <Search data={tvShows}
                         dataType={'TV Show'}
                         searchResults={setFilteredTvShows}
